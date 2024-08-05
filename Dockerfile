@@ -1,4 +1,14 @@
-FROM ubuntu:24.04
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /build
+
+COPY go.mod go.sum main.go ./
+
+RUN go mod download
+
+RUN GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o nordvpn-docker
+
+FROM ubuntu:24.04 AS runtime
 
 RUN apt-get update && \
 apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates && \
@@ -10,5 +20,6 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT /etc/init.d/nordvpn start && sleep 5 && /bin/bash -c "$@"
-CMD bash
+COPY --from=builder /build/nordvpn-docker /usr/local/bin/nordvpn-docker
+
+ENTRYPOINT ["/usr/local/bin/nordvpn-docker"]
