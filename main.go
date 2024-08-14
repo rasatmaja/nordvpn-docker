@@ -28,6 +28,19 @@ func main() {
 		if err != nil {
 			log.Panic(err)
 		}
+
+		// 1.2 Wait 5 second until daemon started
+		_, err = exec.Command("sleep", "5").Output()
+		if err != nil {
+			log.Panic(err)
+		}
+
+		// 1.3 Check Daemon
+		out, err := exec.Command("/etc/init.d/nordvpn", "status").Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Panic(err)
+		}
 	}
 	log.Println("Nordvpn daemon started")
 
