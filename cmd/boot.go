@@ -5,10 +5,14 @@ func BootUP() {
 	var params *BootUPParams
 	params = new(BootUPParams)
 
-	var daemon, account, connect IBootUP
+	var daemon, account, connect, config IBootUP
 	daemon = new(NordVPNDaemon)
 	account = new(NordVPNAccount)
 	connect = new(NordVPNConnect)
+	config = new(NordVPNConfig)
+
+	// set config flow
+	connect.setNext(config)
 
 	// set bootup flow
 	account.setNext(connect)
