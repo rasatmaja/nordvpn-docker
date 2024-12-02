@@ -16,7 +16,7 @@ var (
 	nordVPNAppLogin   = command("nordvpn", "login", "--token", os.Getenv("NORDVPN_TOKEN"))
 	nordVPNAppConnect = command("nordvpn", "c", os.Getenv("NORDVPN_DEFAULT_CONNECT_COUNTRY"))
 
-	// NordVPN Config
+	// NordVPN Settings
 	nordVPNAppEnableLANDiscovery = command("nordvpn", "set", "lan-discovery", os.Getenv("NORDVPN_ENABLE_LAN_DISCOVERY"))
 )
 
