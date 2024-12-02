@@ -31,7 +31,7 @@ var settings = map[string]func(p *BootUPParams){
 		out, err := nordVPNAppEnableLANDiscovery.Output()
 		log.Printf("%s", out)
 		if err != nil {
-			log.Panic(err)
+			log.Println(err)
 		}
 	},
 }
