@@ -34,4 +34,12 @@ var settings = map[string]func(p *BootUPParams){
 			log.Println(err)
 		}
 	},
+	"killswitch": func(p *BootUPParams) {
+		// set nordvpn kill switch settings
+		out, err := nordVPNAppEnableKillSwitch.Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Println(err)
+		}
+	},
 }
