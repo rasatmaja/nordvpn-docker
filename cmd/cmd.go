@@ -18,6 +18,7 @@ var (
 
 	// NordVPN Settings
 	nordVPNAppEnableLANDiscovery = command("nordvpn", "set", "lan-discovery", os.Getenv("NORDVPN_ENABLE_LAN_DISCOVERY"))
+	nordVPNAppEnableKillSwitch   = command("nordvpn", "set", "killswitch", os.Getenv("NORDVPN_ENABLE_KILL_SWITCH"))
 )
 
 type cmd struct {
