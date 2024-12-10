@@ -42,4 +42,11 @@ var settings = map[string]func(p *BootUPParams){
 			log.Println(err)
 		}
 	},
+	"ipv6": func(p *BootUPParams) {
+		out, err := nordVPNAppEnableIPv6.Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Println(err)
+		}
+	},
 }
