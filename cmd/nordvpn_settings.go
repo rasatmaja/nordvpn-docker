@@ -49,4 +49,11 @@ var settings = map[string]func(p *BootUPParams){
 			log.Println(err)
 		}
 	},
+	"firewall": func(p *BootUPParams) {
+		out, err := nordVPNAppEnableFirewall.Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Println(err)
+		}
+	},
 }
