@@ -56,4 +56,11 @@ var settings = map[string]func(p *BootUPParams){
 			log.Println(err)
 		}
 	},
+	"technology": func(p *BootUPParams) {
+		out, err := nordVPNAppTechnology.Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Println(err)
+		}
+	},
 }
