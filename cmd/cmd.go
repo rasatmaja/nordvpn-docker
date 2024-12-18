@@ -21,6 +21,7 @@ var (
 	nordVPNAppEnableKillSwitch   = command("nordvpn", "set", "killswitch", os.Getenv("NORDVPN_ENABLE_KILL_SWITCH"))
 	nordVPNAppEnableIPv6         = command("nordvpn", "set", "ipv6", os.Getenv("NORDVPN_ENABLE_IPV6"))
 	nordVPNAppEnableFirewall     = command("nordvpn", "set", "firewall", os.Getenv("NORDVPN_ENABLE_FIREWALL"))
+	nordVPNAppTechnology         = command("nordvpn", "set", "technology", os.Getenv("NORDVPN_DEFAULT_TECHNOLOGY"))
 )
 
 type cmd struct {
