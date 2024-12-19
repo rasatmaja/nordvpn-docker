@@ -63,4 +63,11 @@ var settings = map[string]func(p *BootUPParams){
 			log.Println(err)
 		}
 	},
+	"autoconnect": func(p *BootUPParams) {
+		out, err := nordVPNAppEnableAutoConnect.Output()
+		log.Printf("%s", out)
+		if err != nil {
+			log.Println(err)
+		}
+	},
 }
