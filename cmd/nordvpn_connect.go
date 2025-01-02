@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"log"
+	"log/slog"
 )
 
 // NordVPNConnect --
@@ -11,9 +11,9 @@ func (n *NordVPNConnect) setNext(next IBootUP) { n.next = next }
 
 func (n *NordVPNConnect) execute(p *BootUPParams) {
 	out, err := nordVPNAppConnect.Output()
-	log.Printf("%s", out)
+	slog.Info(string(out))
 	if err != nil {
-		log.Panic(err)
+		panic(err)
 	}
 
 	if n.next != nil {

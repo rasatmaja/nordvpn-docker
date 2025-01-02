@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"log"
+	"log/slog"
 	"nordvpn-docker/cmd"
 	"os"
 	"os/signal"
@@ -29,7 +29,7 @@ func main() {
 	proc.Go(func() error {
 		sig := <-sigs
 
-		log.Printf("received signal %s \n", sig)
+		slog.Info("received signal", slog.String("signal", sig.String()))
 
 		// cancel context after reveived signal interrupt
 		cancel()
@@ -38,9 +38,9 @@ func main() {
 	})
 
 	if err := proc.Wait(); err != nil {
-		log.Panicln(err)
+		panic(err)
 	}
 
-	log.Println("Shutting down...")
-	log.Println("Shutdown complete")
+	slog.Info("Shutting down...")
+	slog.Info("Shutdown complete")
 }
