@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"log"
+	"log/slog"
 )
 
 // NordVPNSetting --
@@ -12,7 +12,7 @@ func (n *NordVPNSetting) setNext(next IBootUP) { n.next = next }
 func (n *NordVPNSetting) execute(p *BootUPParams) {
 
 	for setting, funcx := range settings {
-		log.Printf("set settings %s", setting)
+		slog.Info("set setting", slog.String("setting", setting))
 		funcx(p)
 	}
 
@@ -24,50 +24,50 @@ func (n *NordVPNSetting) execute(p *BootUPParams) {
 var settings = map[string]func(p *BootUPParams){
 	"lan-discovery": func(p *BootUPParams) {
 		if !p.IsDaemonRunning {
-			log.Panic("Daemon not running")
+			panic("Daemon not running")
 		}
 
 		// set nordvpn lan discovery settings
 		out, err := nordVPNAppEnableLANDiscovery.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 	"killswitch": func(p *BootUPParams) {
 		// set nordvpn kill switch settings
 		out, err := nordVPNAppEnableKillSwitch.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 	"ipv6": func(p *BootUPParams) {
 		out, err := nordVPNAppEnableIPv6.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 	"firewall": func(p *BootUPParams) {
 		out, err := nordVPNAppEnableFirewall.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 	"technology": func(p *BootUPParams) {
 		out, err := nordVPNAppTechnology.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 	"autoconnect": func(p *BootUPParams) {
 		out, err := nordVPNAppEnableAutoConnect.Output()
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 		}
 	},
 }

@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"log"
+	"log/slog"
 )
 
 // NordVPNAccount --
@@ -14,22 +14,22 @@ func (n *NordVPNAccount) execute(p *BootUPParams) {
 	p.IsAccountLoggedIn = true
 
 	// 2. Check if account already loggen in
-	log.Println("Checking nordvpn account...")
+	slog.Info("Checking nordvpn account...")
 	out, err := nordVPNAppAccount.Output()
-	log.Printf("%s", out)
+	slog.Info(string(out))
 	if err != nil {
 		p.IsAccountLoggedIn = false
 	}
 
 	if !p.IsAccountLoggedIn {
 		// 2.1 If account are no logged in then try login using token
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		out, err = nordVPNAppLogin.Output()
 		if err != nil {
-			log.Printf("%s", out)
-			log.Panic(err)
+			slog.Error(string(out))
+			panic(err)
 		}
-		log.Printf("%s", out)
+		slog.Info(string(out))
 		p.IsAccountLoggedIn = true
 	}
 
