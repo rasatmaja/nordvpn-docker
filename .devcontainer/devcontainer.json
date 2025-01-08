@@ -9,7 +9,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/go:1": {
-			"version": "1.22"
+			"version": "1.23"
 		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
