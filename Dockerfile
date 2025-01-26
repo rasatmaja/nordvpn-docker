@@ -8,7 +8,7 @@ COPY cmd ./cmd
 
 RUN go mod download
 
-RUN GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o nordvpn-docker
+RUN GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o gonordvpn
 
 FROM ubuntu:24.04 AS runtime
 
@@ -22,6 +22,6 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /build/nordvpn-docker /usr/local/bin/nordvpn-docker
+COPY --from=builder /build/gonordvpn /usr/local/bin/gonordvpn
 
-ENTRYPOINT ["/usr/local/bin/nordvpn-docker"]
+ENTRYPOINT ["/usr/local/bin/gonordvpn"]
