@@ -24,4 +24,5 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
 
 COPY --from=builder /build/gonordvpn /usr/local/bin/gonordvpn
 
-ENTRYPOINT ["/usr/local/bin/gonordvpn"]
+ENTRYPOINT ["/bin/bash", "-c", "/etc/init.d/nordvpn start && sleep 5 && exec \"$@\"", "--"]
+CMD ["/usr/local/bin/gonordvpn"]
