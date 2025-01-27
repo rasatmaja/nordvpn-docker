@@ -13,6 +13,21 @@ import (
 
 func main() {
 
+	// get args without program name
+	args := os.Args[1:]
+	if len(args) > 0 && args[0] == "healthcheck" {
+		healthcheck()
+		return
+	}
+
+	bootup()
+}
+
+func healthcheck() {
+	cmd.Healtcheck()
+}
+
+func bootup() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
