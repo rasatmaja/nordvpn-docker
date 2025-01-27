@@ -7,7 +7,7 @@ import (
 
 var (
 	// NordVPN Daemon
-	nordVPNDaemonStatus = command("/etc/init.d/nordvpn", "status")
+	nordVPNDaemonStatus = command("bash", "-c", "ps -ef | grep -v grep | grep nordvpnd")
 	nordVPNDaemonStart  = command("/etc/init.d/nordvpn", "start")
 
 	// NordVPN App

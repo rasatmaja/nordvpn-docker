@@ -37,6 +37,45 @@ docker pull ghcr.io/rasatmaja/nordvpn-docker:latest
 | NORDVPN_ENABLE_FIREWALL           | Enable or disable the firewall                            |
 | NORDVPN_ENABLE_AUTO_CONNECT       | Enable or disable auto-connect                            |
 
+### Docker Compose
+```yml
+services:
+  gonordvpn:
+    image: ghcr.io/rasatmaja/nordvpn-docker:latest
+    environment:
+      NORDVPN_TOKEN: xxxx
+      NORDVPN_DEFAULT_CONNECT_COUNTRY: singapore
+      NORDVPN_ENABLE_LAN_DISCOVERY: true
+      NORDVPN_ENABLE_IPV6: false
+      NORDVPN_ENABLE_KILL_SWITCH: true
+    cap_add: 
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+    healthcheck:
+      test: ["CMD", "gonordvpn", "healthcheck"]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+    ports:
+      - 3000:3000 # expose port for firefox
+      - 3001:3001 # expose port for firefox
+    restart: unless-stopped  
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    shm_size: "1gb"
+    restart: unless-stopped
+    network_mode: service:gonordvpn
+    depends_on:
+      gonordvpn:
+        condition: service_healthy
+```
+
 ## What I Learn from this Project
 Here are a few things I learned while building this project:
 
