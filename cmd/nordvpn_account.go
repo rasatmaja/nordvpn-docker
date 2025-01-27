@@ -23,7 +23,6 @@ func (n *NordVPNAccount) execute(p *BootUPParams) {
 
 	if !p.IsAccountLoggedIn {
 		// 2.1 If account are no logged in then try login using token
-		slog.Info(string(out))
 		out, err = nordVPNAppLogin.Output()
 		if err != nil {
 			slog.Error(string(out))
