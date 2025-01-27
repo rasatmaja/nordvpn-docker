@@ -7,9 +7,8 @@ import (
 
 var (
 	// NordVPN Daemon
-	nordVPNDaemonStatus      = command("bash", "-c", "ps -ef | grep -v grep | grep nordvpnd")
-	nordVPNDaemonStart       = command("/etc/init.d/nordvpn", "start")
-	nordVPNKillZombieProcess = command("bash", "-c", "kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')")
+	nordVPNDaemonStatus = command("bash", "-c", "ps -ef | grep -v grep | grep nordvpnd")
+	nordVPNDaemonStart  = command("/etc/init.d/nordvpn", "start")
 
 	// NordVPN App
 	nordVPNAppStatus  = command("nordvpn", "status")

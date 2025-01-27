@@ -26,13 +26,6 @@ func (n *NordVPNDaemon) execute(p *BootUPParams) {
 
 	if !p.IsDaemonRunning {
 
-		// Kill Zombie Process
-		out, err = nordVPNKillZombieProcess.Output()
-		slog.Info(fmt.Sprintf("Killing zombie process: %s", string(out)))
-		if err != nil {
-			slog.Error(fmt.Sprintf("Error killing zombie process: %s", err.Error()))
-		}
-
 		// 1.1 If nordvpn not running start daemon
 		out, err = nordVPNDaemonStart.Output()
 		slog.Info(fmt.Sprintf("Starting nordvpn daemon.. %s", string(out)))
