@@ -42,6 +42,7 @@ docker pull ghcr.io/rasatmaja/nordvpn-docker:latest
 services:
   gonordvpn:
     image: ghcr.io/rasatmaja/nordvpn-docker:latest
+    container_name: gonordvpn
     environment:
       NORDVPN_TOKEN: xxxx
       NORDVPN_DEFAULT_CONNECT_COUNTRY: singapore
