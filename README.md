@@ -42,12 +42,15 @@ docker pull ghcr.io/rasatmaja/nordvpn-docker:latest
 services:
   gonordvpn:
     image: ghcr.io/rasatmaja/nordvpn-docker:latest
+    container_name: gonordvpn
     environment:
       NORDVPN_TOKEN: xxxx
       NORDVPN_DEFAULT_CONNECT_COUNTRY: singapore
-      NORDVPN_ENABLE_LAN_DISCOVERY: true
+      NORDVPN_DEFAULT_TECHNOLOGY: NORDLYNX
       NORDVPN_ENABLE_IPV6: false
       NORDVPN_ENABLE_KILL_SWITCH: true
+      NORDVPN_ENABLE_AUTO_CONNECT: true
+      NORDVPN_ENABLE_LAN_DISCOVERY: true
     cap_add: 
       - NET_ADMIN
     sysctls:
